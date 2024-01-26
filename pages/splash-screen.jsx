@@ -1,6 +1,11 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function Splash() {
+export default function Splash({}) {
+
+  const nav = useNavigation()
 
   return (
     <>
@@ -19,7 +24,7 @@ export default function Splash() {
           O aplicativo para organizar suas atividades, deveres e tarefas.
         </Text>
         <View style={styles.buttonContainer}>
-          <Pressable style={styles.button}>
+          <Pressable style={styles.button} onPress={() => {nav.navigate('home')}}>
             <Text style={styles.buttonText}>Vamos Lá! </Text>
             <Image source={require("../assets/images/seta.png")} style={styles.btnImage}/>
           </Pressable>
