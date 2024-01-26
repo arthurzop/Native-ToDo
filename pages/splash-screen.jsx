@@ -1,11 +1,7 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import { useFonts } from "expo-font";
 
 export default function Splash() {
-  const [fontsLoaded, fontError] = useFonts({
-    "DM Sans": require("../assets/fonts/DMSans-VariableFont_opsz,wght.ttf"),
-    "DM Sans Italic": require("../assets/fonts/DMSans-Italic-VariableFont_opsz,wght.ttf"),
-  });
+
   return (
     <>
       <View style={styles.background}>
@@ -25,7 +21,7 @@ export default function Splash() {
         <View style={styles.buttonContainer}>
           <Pressable style={styles.button}>
             <Text style={styles.buttonText}>Vamos Lá! </Text>
-            <Image source={require("../assets/images/seta.png")} />
+            <Image source={require("../assets/images/seta.png")} style={styles.btnImage}/>
           </Pressable>
         </View>
       </View>
@@ -43,7 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   logoContainer: {
-    marginTop: 100,
+    marginTop: 250,
     flexDirection: "row",
     gap: 5,
   },
@@ -60,7 +56,8 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   descricao: {
-    width: "60%",
+    width: "70%",
+    marginTop: -150,
     textAlign: 'center',
     fontSize: 35,
     color: '#fff'
@@ -76,12 +73,17 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
   },
   buttonText: {
     color: "#fff",
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: "bold",
-    marginHorizontal: 80,
+    marginStart: 100,
+    marginEnd: 50
   },
+  btnImage: {
+    resizeMode: 'contain',
+    width: 50,
+    height: 30
+  }
 });
