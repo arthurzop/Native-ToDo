@@ -25,7 +25,7 @@ export default function Splash({}) {
         </Text>
         <View style={styles.buttonContainer}>
           <Pressable style={styles.button} onPress={() => {nav.navigate('home')}}>
-            <Text style={styles.buttonText}>Vamos Lá! </Text>
+            <Text style={styles.buttonText}>Vamos lá! </Text>
             <Image source={require("../assets/images/seta.png")} style={styles.btnImage}/>
           </Pressable>
         </View>

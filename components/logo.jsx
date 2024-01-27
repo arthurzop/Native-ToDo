@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        marginVertical: 50
+        marginVertical: 30
     },
     logoText: {
         position: 'absolute',
