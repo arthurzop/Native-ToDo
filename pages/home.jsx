@@ -2,71 +2,52 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Logo from "../components/logo";
-import { FAB, Icon } from "react-native-elements";
+import Menu from "../components/menuOp";
+import CardTarefa from "../components/cards/tarefa";
+import { Button, Icon } from "react-native-elements";
 
 export default function Home({}) {
   return (
     <>
       <View>
         <Logo />
-        <View style={styles.headerMenu}>
-          <Pressable>
-            <Text style={styles.menuText}>Tudo</Text>
-          </Pressable>
-          <View style={styles.menuOptions}>
-            <Pressable>
-              <Text style={styles.menuText2}>Baixa</Text>
-            </Pressable>
-            <Pressable>
-              <Text style={styles.menuText2}>Média</Text>
-            </Pressable>
-            <Pressable>
-              <Text style={styles.menuText2}>Alta</Text>
-            </Pressable>
-          </View>
+        <Menu />
+        <View style={style.divider} />
+        <View style={style.backgroundContainer}>
+          {/* <Text style={style.backgroundText}>Parece que você ainda não adicionou nenhuma tarefa!</Text> */}
+          <CardTarefa />
+          <CardTarefa />
+          <CardTarefa />
+          <CardTarefa />
+          <CardTarefa />
+          <Button
+            title="Adicionar Tarefa"
+            icon={<Icon name="add" size={25} color="#FFF" />}
+            buttonStyle={{
+              backgroundColor: "#A3B18A",
+              height: 50,
+              borderRadius: 100,
+              alignItems: 'center'
+            }}
+            titleStyle={{
+              fontSize: 20,
+              fontWeight: 'bold'
+            }}
+            containerStyle={{
+              width: "50%",
+              alignSelf: "center",
+              position: "absolute",
+              bottom: 440,
+              
+            }}
+          />
         </View>
-        <View style={styles.divider} />
-        <View style={styles.backgroundContainer}>
-            <Text style={styles.backgroundText}>Parece que você ainda não adicionou nenhuma tarefa!</Text>
-            <FAB
-                style={styles.fab}
-                title="Adicionar Tarefa"
-                color="#A3B18A"
-                icon={<Icon name="add" size={25} color="white" />}
-                size="large"
-            />
-        </View>
-        
       </View>
     </>
   );
 }
 
-const styles = StyleSheet.create({
-  headerMenu: {
-    flexDirection: "row",
-    marginStart: 20,
-  },
-  menuOptions: {
-    width: 100,
-    flexDirection: "row",
-    gap: 25,
-  },
-  menuText: {
-    fontWeight: "bold",
-    fontSize: 25,
-    marginEnd: 90,
-    backgroundColor: "#DAD7CD",
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    borderRadius: 100,
-    marginBottom: 10,
-  },
-  menuText2: {
-    fontWeight: "bold",
-    fontSize: 25,
-    color: "#989898",
-  },
+const style = StyleSheet.create({
   divider: {
     height: 1,
     width: "100%",
@@ -76,18 +57,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#EDEDED",
     width: "100%",
     minHeight: "100%",
+    paddingVertical: 10,
   },
   backgroundText: {
-    color: '#989898',
-    alignSelf: 'center',
-    textAlign: 'left',
+    color: "#989898",
+    alignSelf: "center",
+    textAlign: "left",
     fontSize: 45,
-    fontWeight: 'bold',
-    padding: 25
+    fontWeight: "bold",
+    padding: 25,
   },
-  fab: {
-    position: 'absolute',
-    alignSelf: 'center',
-    marginVertical: 580
-  }
 });

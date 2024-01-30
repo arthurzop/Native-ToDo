@@ -9,24 +9,24 @@ export default function Splash({}) {
 
   return (
     <>
-      <View style={styles.background}>
-        <View style={styles.logoContainer}>
-          <View style={styles.logo}>
+      <View style={style.background}>
+        <View style={style.logoContainer}>
+          <View style={style.logo}>
             <Image source={require("../assets/images/check.png")} />
             <Image source={require("../assets/images/check.png")} />
           </View>
-          <View style={styles.logo2}>
-            <Text style={styles.text1}>Organiza</Text>
-            <Text style={styles.text2}>to-do</Text>
+          <View style={style.logo2}>
+            <Text style={style.text1}>Organiza</Text>
+            <Text style={style.text2}>to-do</Text>
           </View>
         </View>
-        <Text style={styles.descricao}>
+        <Text style={style.descricao}>
           O aplicativo para organizar suas atividades, deveres e tarefas.
         </Text>
-        <View style={styles.buttonContainer}>
-          <Pressable style={styles.button} onPress={() => {nav.navigate('home')}}>
-            <Text style={styles.buttonText}>Vamos lá! </Text>
-            <Image source={require("../assets/images/seta.png")} style={styles.btnImage}/>
+        <View style={style.buttonContainer}>
+          <Pressable style={style.button} onPress={() => {nav.navigate('home')}}>
+            <Text style={style.buttonText}>Vamos lá! </Text>
+            <Image source={require("../assets/images/seta.png")} style={style.btnImage}/>
           </Pressable>
         </View>
       </View>
@@ -34,7 +34,7 @@ export default function Splash({}) {
   );
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   background: {
     backgroundColor: "#3A5A40",
     height: "100%",
