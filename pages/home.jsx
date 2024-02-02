@@ -72,20 +72,6 @@ export default function Home({ }) {
               <View style={style.modalContent}>
                 <Text style={style.modalTitle}>Nova Tarefa</Text>
                 <View style={style.inputArea}>
-                  <View style={style.inputRow}>
-                    <Text style={style.inputText}>Data:</Text>
-                    <DatePickerInput
-                      locale="pt"
-                      label={''}
-                      value={inputData}
-                      onChange={(d) => setInputData(d)}
-                      mode="outlined"
-                      startYear={2024}
-                      presentationStyle="pageSheet"
-                      autoCapitalize="a"
-                      contentStyle={style}
-                    />
-                  </View>
                   <View>
                     <Text style={style.inputText}>Título:</Text>
                     <TextInput
@@ -111,6 +97,17 @@ export default function Home({ }) {
                       dropdownStyle={style.dropdownStyle}
                       rowStyle={style.rowStyle}
                       rowTextStyle={style.rowTextStyle}
+                    />
+                  </View>
+                  <View style={style.inputRow}>
+                    <Text style={style.inputTextData}>Data:</Text>
+                    <DatePickerInput
+                      locale="pt"
+                      label={''}
+                      value={inputData}
+                      onChange={(d) => setInputData(d)}
+                      mode="outlined"
+                      startYear={2024}
                     />
                   </View>
                   <View>
@@ -267,6 +264,11 @@ export const style = StyleSheet.create({
   inputText: {
     fontSize: 25,
     color: "#444",
+  },
+  inputTextData: {
+    fontSize: 25,
+    color: "#444",
+    width:  "40%"
   },
   input: {
     width: "100%",
