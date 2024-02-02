@@ -24,16 +24,6 @@ export default function Home({ }) {
 
   const [inputData, setInputData] = useState(undefined)
 
-  const getCurrentDate=()=>{
- 
-    var date = new Date().getDate();
-    var month = new Date().getMonth() + 1;
-    var year = new Date().getFullYear();
-
-    //Alert.alert(date + '-' + month + '-' + year);
-    // You can turn it in to your desired format
-    return date + '-' + month + '-' + year;//format: d-m-y;
-}
 
 
   return (
@@ -93,6 +83,7 @@ export default function Home({ }) {
                       startYear={2024}
                       presentationStyle="pageSheet"
                       autoCapitalize="a"
+                      contentStyle={style}
                     />
                   </View>
                   <View>
@@ -242,7 +233,7 @@ export const style = StyleSheet.create({
     borderRadius: 40,
     paddingVertical: 30,
     alignItems: "center",
-    height: 660,
+    height: 675,
     elevation: 480
   },
   modalContent: {
@@ -256,6 +247,10 @@ export const style = StyleSheet.create({
     fontWeight: "bold",
     color: "#3A5A40",
     top: -10,
+  },
+  inputDate: {
+    width: "90%",
+    backgroundColor: null,
   },
   inputArea: {
     gap: 20,
@@ -300,7 +295,7 @@ export const style = StyleSheet.create({
     resizeMode: "contain",
     width: 60,
     height: 60,
-    bottom: 20
+    bottom: "50%"
   },
   rowStyle: { //estilo das linhas do botao dropdown (dentro)
     backgroundColor: null
