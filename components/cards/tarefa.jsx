@@ -1,22 +1,23 @@
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import lostTask from "../../assets/images/lost-task.png"
 
 export default function CardTarefa() {
+
+    const nav = useNavigation();
     return(
-        <View style={style.cardContainer}>
-            <Pressable>
-                <Image source={lostTask} style={style.taskStatus}/>
-            </Pressable>
-            <View style={style.nameContainer}>
-                <Text style={style.taskName}>nome da tarefa</Text>
-                <View style={style.taskSubContainer}>
-                    <Text style={style.taskSub}>29/01/2024</Text>
-                    <Text style={style.taskSub}>•</Text>
-                    <Text style={style.taskSub}>21:08</Text>
+        <View>
+            <Pressable style={style.cardContainer} onPress={() => {nav.navigate('tarefaAberta')}}>
+                <View style={style.nameContainer}>
+                    <Text style={style.taskName}>nome da tarefa</Text>
+                    <View style={style.taskSubContainer}>
+                        <Text style={style.taskSub}>29/01/2024</Text>
+                        <Text style={style.taskSub}>•</Text>
+                        <Text style={style.taskSub}>Trabalho</Text>
+                    </View>
                 </View>
-            </View>
-            <View style={style.taskPriority}/>
-            
+                <View style={style.taskPriority}/>
+            </Pressable>
         </View>
     )
 }
@@ -43,14 +44,14 @@ const style = StyleSheet.create({
         gap: 3
     },
     taskName: {
-        fontSize: 22,
+        fontSize: 24,
         fontWeight: 'bold',
         textTransform: 'capitalize',
         fontStyle: 'italic'
     },
     taskSubContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     taskSub: {
         color: '#686868',

@@ -6,19 +6,35 @@ import {
   Pressable,
   Modal,
   TextInput,
-  TouchableWithoutFeedback,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import Logo from "../components/logo";
 import Menu from "../components/menuOp";
 import CardTarefa from "../components/cards/tarefa";
 import { Button, Icon } from "react-native-elements";
+import SelectDropdown from 'react-native-select-dropdown'
+import { DatePickerInput } from 'react-native-paper-dates';
 
-export default function Home({}) {
+
+
+export default function Home({ }) {
   const [openModal, setOpenModal] = useState(false);
 
-  const nav = useNavigation()
+  const categoria = ["Pessoal", "Estudo", "Trabalho", "Outro"]
+
+  const [inputData, setInputData] = useState(undefined)
+
+  const getCurrentDate=()=>{
+ 
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+
+    //Alert.alert(date + '-' + month + '-' + year);
+    // You can turn it in to your desired format
+    return date + '-' + month + '-' + year;//format: d-m-y;
+}
+
 
   return (
     <>
@@ -68,10 +84,16 @@ export default function Home({}) {
                 <View style={style.inputArea}>
                   <View style={style.inputRow}>
                     <Text style={style.inputText}>Data:</Text>
-                    <TextInput
-                      placeholder="dd/mm/aaaa"
-                      style={style.inputDate}
-                    ></TextInput>
+                    <DatePickerInput
+                      locale="pt"
+                      label={''}
+                      value={inputData}
+                      onChange={(d) => setInputData(d)}
+                      mode="outlined"
+                      startYear={2024}
+                      presentationStyle="pageSheet"
+                      autoCapitalize="a"
+                    />
                   </View>
                   <View>
                     <Text style={style.inputText}>Título:</Text>
@@ -81,19 +103,28 @@ export default function Home({}) {
                     ></TextInput>
                   </View>
                   <View>
+                    <Text style={style.inputText}>Descrição:</Text>
+                    <TextInput
+                      placeholder="e.g: lorem ipsum dolor"
+                      style={style.input}
+                    ></TextInput>
+                  </View>
+                  <View>
+                    <Text style={style.inputText}>Categoria:</Text>
+                    <SelectDropdown
+                      data={categoria}
+                      defaultButtonText='Escolha uma Categoria'
+                      defaultValue={'pessoal'}
+                      buttonStyle={style.buttonStyle}
+                      buttonTextStyle={style.buttonTextStyle}
+                      dropdownStyle={style.dropdownStyle}
+                      rowStyle={style.rowStyle}
+                      rowTextStyle={style.rowTextStyle}
+                    />
+                  </View>
+                  <View>
                     <Text style={style.inputText}>Prioridade:</Text>
                     <View style={style.btnRow}>
-                      {/* <TouchableWithoutFeedback onPress={handlePress} onPressOut={handleUnPress}>
-                        <Pressable  style={[style.inputButton1, inputButton1]}>
-                          <Text style={style.btnText1}>Baixa</Text>
-                        </Pressable >
-                      </TouchableWithoutFeedback>
-                      <TouchableWithoutFeedback style={style.inputButton2}>
-                        <Text style={style.btnText2}>Média</Text>
-                      </TouchableWithoutFeedback>
-                      <TouchableWithoutFeedback style={style.inputButton3}>
-                        <Text style={style.btnText3}>Alta</Text>
-                      </TouchableWithoutFeedback> */}
                       <Button
                         title={"Baixa"}
                         buttonStyle={{
@@ -124,13 +155,13 @@ export default function Home({}) {
                         titleStyle={{
                           fontSize: 20,
 
-                          paddingHorizontal: 8,
-                          color: "#FFC500",
-                        }}
-                      />
-                      <Button
-                        title={"Alta"}
-                        buttonStyle={{
+                          paddingHorizontal: 8, 
+                          color: "#FFC500", 
+                        }} 
+                      /> 
+                      <Button 
+                        title={"Alta"} 
+                        buttonStyle={{ 
                           backgroundColor: "#FFBBBBCC",
                           height: 45,
                           borderRadius: 50,
@@ -162,6 +193,7 @@ export default function Home({}) {
                       containerStyle={{
                         width: "60%",
                         alignSelf: "center",
+                        bottom: 10
                       }}
                     />
                   </View>
@@ -183,7 +215,7 @@ export default function Home({}) {
   );
 }
 
-const style = StyleSheet.create({
+export const style = StyleSheet.create({
   divider: {
     height: 1,
     width: "100%",
@@ -196,7 +228,7 @@ const style = StyleSheet.create({
     paddingVertical: 10,
   },
   backgroundText: {
-    color: "#989898",
+    color: "#333",
     alignSelf: "center",
     textAlign: "left",
     fontSize: 45,
@@ -210,8 +242,8 @@ const style = StyleSheet.create({
     borderRadius: 40,
     paddingVertical: 30,
     alignItems: "center",
-    height: 550,
-    elevation: 480,
+    height: 660,
+    elevation: 480
   },
   modalContent: {
     width: "100%",
@@ -223,9 +255,10 @@ const style = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     color: "#3A5A40",
+    top: -10,
   },
   inputArea: {
-    gap: 30,
+    gap: 20,
     margin: 10,
     height: "100%",
   },
@@ -234,11 +267,11 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "90%",
-    marginVertical: 20,
+    marginVertical: 1,
   },
   inputText: {
     fontSize: 25,
-    color: "#686868",
+    color: "#444",
   },
   input: {
     width: "100%",
@@ -246,7 +279,7 @@ const style = StyleSheet.create({
     fontSize: 18,
     textAlign: "left",
     borderBottomWidth: 1,
-    borderBottomColor: "#000",
+    borderBottomColor: "#D9D9D9",
   },
   inputDate: {
     fontSize: 15,
@@ -265,7 +298,30 @@ const style = StyleSheet.create({
   },
   btnFechar: {
     resizeMode: "contain",
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
+    bottom: 20
   },
+  rowStyle: { //estilo das linhas do botao dropdown (dentro)
+    backgroundColor: null
+  },
+  rowTextStyle: { //estilo dos textos de dentro do botao dropdow
+    backgroundColor: null
+  },
+  dropdownStyle: { //estilo do botao dropdown (dentro)
+    backgroundColor: '#FFF',
+    borderRadius: 10
+  },
+  buttonStyle: { //estilo do botao dropdown (fora)
+    width: '100%',
+    backgroundColor: null,
+    fontSize: 18,
+    borderBottomWidth: 1,
+    borderBottomColor: "#D9D9D9",
+
+  },
+  buttonTextStyle: { // estilo do texto do botao dropdow (fora)
+    color: '#686868',
+    textAlign: 'left'
+  }
 });
