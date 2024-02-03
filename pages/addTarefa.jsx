@@ -1,21 +1,13 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-  TextInput,
-  Modal,
-} from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
+import Logo from "../components/logo";
+import { Button } from "react-native-elements";
+import { ButtonGroup } from "@rneui/themed";
+import SelectDropdown from "react-native-select-dropdown";
 import { DatePickerInput } from "react-native-paper-dates";
 import { useState } from "react";
-import Logo from "../components/logo";
-import SelectDropdown from "react-native-select-dropdown";
-import { Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { ButtonGroup } from "@rneui/themed";
 
-export default function TarefaAberta() {
+export default function AddTarefa() {
   //as categorias possiveis pra tarefa (por padrao ta pessoal)
   const categoria = ["Pessoal", "Estudo", "Trabalho", "Outro"];
 
@@ -27,9 +19,6 @@ export default function TarefaAberta() {
 
   //useNavigation pra navegar
   const nav = useNavigation();
-
-  //usestate para abrir a modal de confirmação de exclusão
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <View style={style.newContainer}>
@@ -55,14 +44,15 @@ export default function TarefaAberta() {
       <Logo />
       <View style={style.divider}></View>
       <View style={style.newContent}>
-        <View style={style.titleRow}>
-          <TextInput style={style.taskTitle}>Nome da Tarefa ×</TextInput>
-          <Image
-            source={require("../assets/images/edit-icon.png")}
-            style={style.titleIcon}
-          />
-        </View>
+        <Text style={style.taskTitle}>Nova Tarefa</Text>
         <View style={style.inputArea}>
+          <View>
+            <Text style={style.inputText}>Título:</Text>
+            <TextInput
+              placeholder="e.g: Trabalho de Química"
+              style={style.input}
+            ></TextInput>
+          </View>
           <View style={style.inputRow}>
             <Text style={style.inputTextData}>Data:</Text>
             <DatePickerInput
@@ -116,63 +106,42 @@ export default function TarefaAberta() {
               buttonStyle={{}}
             />
           </View>
-          <View style={style.btnRow2}>
-            {/* botao de excluir a tarefa */}
-            <Pressable
-              onPress={() => {
-                setIsOpen(!isOpen);
+          <View>
+            <Button
+              title="Adicionar"
+              buttonStyle={{
+                backgroundColor: "#A3B18A",
+                height: 60,
+                borderRadius: 50,
               }}
-            >
-              <Image source={require("../assets/images/delete-button.png")} />
-            </Pressable>
-            {/* botao para salvar a tarefa editada */}
-            <Pressable>
-              <Image source={require("../assets/images/save-button.png")} />
-            </Pressable>
+              titleStyle={{
+                fontSize: 30,
+                fontWeight: "bold",
+              }}
+              containerStyle={{
+                width: "60%",
+                alignSelf: "center",
+                bottom: -10,
+              }}
+            />
           </View>
-          <Modal
-            visible={isOpen}
-            transparent={true}
-            animationType="none"
-            onRequestClose={() => {
-              setIsOpen(!isOpen);
-            }}
-          >
-            <View style={modal.modalContainer}>
-              <View style={modal.modalBackground}>
-                <View style={modal.textAreaContainer}>
-                  <Text style={modal.modalTitle}>Tem certeza?</Text>
-                  <Text style={modal.modalText}>
-                    Essa ação não pode ser revertida!
-                  </Text>
-                </View>
-                <View style={modal.btnContainer}>
-                  <Pressable
-                    onPress={() => {
-                      setIsOpen(!isOpen);
-                    }}
-                    style={modal.cancelBtn}
-                  >
-                    <Text style={modal.btnText}>Cancelar</Text>
-                  </Pressable>
-                  <Pressable style={modal.confirmlBtn}>
-                    <Text style={modal.btnText}>Excluir</Text>
-                  </Pressable>
-                </View>
-              </View>
-            </View>
-          </Modal>
         </View>
       </View>
     </View>
   );
 }
 
-//style geral
-const style = StyleSheet.create({
+export const style = StyleSheet.create({
   newContainer: {
     backgroundColor: "#FFFFFF",
     height: `100%`,
+  },
+  closeBtn: {
+    fontSize: 70,
+    position: "absolute",
+    right: 25,
+    top: 25,
+    color: "#9E9E9E",
   },
   divider: {
     height: 1,
@@ -187,28 +156,17 @@ const style = StyleSheet.create({
     marginTop: 20,
   },
   taskTitle: {
-    fontSize: 40,
+    fontSize: 50,
     fontWeight: "bold",
-    color: "#686868",
-    margin: 10,
-  },
-  titleRow: {
-    flexDirection: "row",
-    gap: 10,
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  titleIcon: {
-    resizeMode: "contain",
-    width: 30,
-    height: 30,
+    color: "#3A5A40",
+    top: -10,
   },
   inputDate: {
     width: "90%",
     backgroundColor: null,
   },
   inputArea: {
-    gap: 30,
+    gap: 20,
     margin: 10,
     height: "100%",
   },
@@ -271,70 +229,5 @@ const style = StyleSheet.create({
     // estilo do texto do botao dropdow (fora)
     color: "#686868",
     textAlign: "left",
-  },
-  btnRow2: {
-    flexDirection: `row`,
-    justifyContent: `space-between`,
-    bottom: `-10%`,
-  },
-});
-
-//style do modal
-const modal = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: `center`,
-    alignItems: `center`,
-    backgroundColor: `rgba(0, 0, 0, 0.60)`,
-  },
-  modalBackground: {
-    backgroundColor: `#FFF`,
-    borderRadius: 40,
-    width: `80%`,
-  },
-  textAreaContainer: {
-    gap: 10,
-    alignItems: `center`,
-    padding: 20,
-  },
-  modalTitle: {
-    fontSize: 38,
-    fontWeight: `800`,
-    color: `#3A5A40`,
-  },
-  modalText: {
-    fontSize: 24,
-    paddingBottom: 20,
-    color: `#989898`,
-    textAlign: `center`,
-    width: `80%`,
-    fontWeight: `500`,
-  },
-  btnContainer: {
-    flexDirection: `row`,
-    alignItems: `center`,
-    justifyContent: `center`,
-    gap: 20,
-    paddingBottom: 20,
-  },
-  cancelBtn: {
-    backgroundColor: `#989898`,
-    padding: 10,
-    paddingHorizontal: 15,
-    width: `40`,
-    alignItems: `center`,
-    borderRadius: 50,
-  },
-  confirmlBtn: {
-    backgroundColor: `#FF4F4F`,
-    padding: 10,
-    width: `40%`,
-    alignItems: `center`,
-    borderRadius: 50,
-  },
-  btnText: {
-    fontSize: 30,
-    fontWeight: `600`,
-    color: `#FFF`,
   },
 });

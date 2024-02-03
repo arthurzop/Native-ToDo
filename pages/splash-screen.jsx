@@ -2,8 +2,7 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Splash({}) {
-
-  const nav = useNavigation()
+  const nav = useNavigation();
 
   return (
     <>
@@ -22,9 +21,17 @@ export default function Splash({}) {
           O aplicativo para organizar suas atividades, deveres e tarefas.
         </Text>
         <View style={style.buttonContainer}>
-          <Pressable style={style.button} onPress={() => {nav.navigate('home')}}>
+          <Pressable
+            style={style.button}
+            onPress={() => {
+              nav.navigate("home");
+            }}
+          >
             <Text style={style.buttonText}>Vamos lá! </Text>
-            <Image source={require("../assets/images/seta.png")} style={style.btnImage}/>
+            <Image
+              source={require("../assets/images/seta.png")}
+              style={style.btnImage}
+            />
           </Pressable>
         </View>
       </View>
@@ -61,9 +68,9 @@ const style = StyleSheet.create({
   descricao: {
     width: "70%",
     marginTop: -150,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 35,
-    color: '#fff'
+    color: "#fff",
   },
   buttonContainer: {
     width: "100%",
@@ -82,11 +89,11 @@ const style = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
     marginStart: 100,
-    marginEnd: 50
+    marginEnd: 50,
   },
   btnImage: {
-    resizeMode: 'contain',
+    resizeMode: "contain",
     width: 50,
-    height: 30
-  }
+    height: 30,
+  },
 });
