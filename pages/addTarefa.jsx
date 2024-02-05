@@ -9,16 +9,17 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function AddTarefa() {
   //as categorias possiveis pra tarefa (por padrao ta pessoal)
-  const categoria = ["Pessoal", "Estudo", "Trabalho", "Outro"];
+  const opcoes = ["Pessoal", "Estudo", "Trabalho", "Outro"];
 
   //useState para escolher a prioridade da tarefa
-  const [selectedIndex, setSelectedIndex] = useState([0, 2, 3]);
+  const [selectedIndex, setSelectedIndex] = useState([0, 1, 2]);
 
   //useState pra escolher a data
   const [inputData, setInputData] = useState(undefined);
 
   //useNavigation pra navegar
   const nav = useNavigation();
+
 
   return (
     <View style={style.newContainer}>
@@ -51,6 +52,7 @@ export default function AddTarefa() {
             <TextInput
               placeholder="e.g: Trabalho de Química"
               style={style.input}
+              
             ></TextInput>
           </View>
           <View style={style.inputRow}>
@@ -74,7 +76,7 @@ export default function AddTarefa() {
           <View>
             <Text style={style.inputText}>Categoria:</Text>
             <SelectDropdown
-              data={categoria}
+              data={opcoes}
               defaultButtonText="Escolha uma Categoria"
               defaultValue={"pessoal"}
               buttonStyle={style.buttonStyle}
@@ -103,7 +105,6 @@ export default function AddTarefa() {
               selectedButtonStyle={{
                 backgroundColor: "#A3B18A",
               }}
-              buttonStyle={{}}
             />
           </View>
           <View>
